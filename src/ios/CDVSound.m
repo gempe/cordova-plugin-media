@@ -486,7 +486,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
         NSLog(@"Failed to initialize AVAudioPlayer: %@\n", [playerError localizedDescription]);
         audioFile.player = nil;
         if (! keepAvAudioSessionAlwaysActive && self.avSession && ! [self isPlayingOrRecording]) {
-            [self.avSession setActive:NO error:nil];
+            [self.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
         }
         bError = YES;
     } else {
@@ -617,7 +617,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                 avPlayer = nil;
             }
             if (! keepAvAudioSessionAlwaysActive && self.avSession && ! [self isPlayingOrRecording]) {
-                [self.avSession setActive:NO error:nil];
+                [self.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
                 self.avSession = nil;
             }
             [[self soundCache] removeObjectForKey:mediaId];
@@ -722,7 +722,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                 }
                 audioFile.recorder = nil;
                 if (! keepAvAudioSessionAlwaysActive && weakSelf.avSession && ! [self isPlayingOrRecording]) {
-                    [weakSelf.avSession setActive:NO error:nil];
+                    [weakSelf.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
                 }
                 [weakSelf onStatus:MEDIA_ERROR mediaId:mediaId param:
                            [self createAbortError:errorMsg]];
@@ -742,7 +742,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                     NSLog(@"%@", msg);
                     audioFile.recorder = nil;
                     if (! keepAvAudioSessionAlwaysActive && weakSelf.avSession && ! [self isPlayingOrRecording]) {
-                        [weakSelf.avSession setActive:NO error:nil];
+                        [weakSelf.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
                     }
                     [weakSelf onStatus:MEDIA_ERROR mediaId:mediaId param:
                            [self createAbortError:msg]];
@@ -790,7 +790,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
           [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
     }
     if (! keepAvAudioSessionAlwaysActive && self.avSession && ! [self isPlayingOrRecording]) {
-        [self.avSession setActive:NO error:nil];
+        [self.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
     }
 }
 
@@ -812,7 +812,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
             [self createMediaErrorWithCode:MEDIA_ERR_DECODE message:nil]];
     }
      if (! keepAvAudioSessionAlwaysActive && self.avSession && ! [self isPlayingOrRecording]) {
-         [self.avSession setActive:NO error:nil];
+         [self.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
      }
 }
 
@@ -821,7 +821,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
     NSString* mediaId = self.currMediaId;
 
      if (! keepAvAudioSessionAlwaysActive && self.avSession && ! [self isPlayingOrRecording]) {
-         [self.avSession setActive:NO error:nil];
+         [self.avSession setCategory:AVAudioSessionCategoryAmbient error:nil];
      }
     [self onStatus:MEDIA_STATE mediaId:mediaId param:@(MEDIA_STOPPED)];
 }
